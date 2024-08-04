@@ -14,6 +14,8 @@ import { ConfigurationService } from '@infrastructure/configuration';
         username: config.databaseUsername,
         password: config.databasePassword,
         autoLoadEntities: true,
+        synchronize: true,
+        logging: true,
         logger: config.isProduction ? 'file' : 'advanced-console',
       }),
       inject: [ConfigurationService],
