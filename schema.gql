@@ -1,0 +1,62 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+input CreateDictionaryDTO {
+  name: String!
+}
+
+input CreateRecordDTO {
+  color: String!
+  dictionaryId: ID!
+  name: String!
+  value: String!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type Dictionary {
+  createdAt: DateTime!
+  id: ID!
+  name: String!
+  records: [Record!]!
+}
+
+type Mutation {
+  createDictionary(createDictionaryInput: CreateDictionaryDTO!): Dictionary!
+  createRecord(createRecordInput: CreateRecordDTO!): Record!
+  removeDictionary(id: ID!): Boolean!
+  removeRecord(id: ID!): Boolean!
+  updateDictionary(id: ID!, updateDictionaryInput: UpdateDictionaryDTO!): Dictionary!
+  updateRecord(id: ID!, updateRecordInput: UpdateRecordDTO!): Record!
+}
+
+type Query {
+  dictionaries: [Dictionary!]!
+  dictionary(id: ID!): Dictionary!
+  record(id: ID!): Dictionary!
+  records: [Record!]!
+}
+
+type Record {
+  color: String!
+  createdAt: DateTime!
+  dictionary: Dictionary!
+  id: ID!
+  name: String!
+  value: String!
+}
+
+input UpdateDictionaryDTO {
+  name: String
+}
+
+input UpdateRecordDTO {
+  color: String
+  dictionaryId: ID
+  name: String
+  value: String
+}
