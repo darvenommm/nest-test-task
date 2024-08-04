@@ -22,6 +22,10 @@ export class ConfigurationService implements IConfigurationService {
 
   // server
   public get serverHost(): string {
+    if (this.isProduction) {
+      return '0.0.0.0';
+    }
+
     return this.configService.get('SERVER_HOST', { infer: true });
   }
 
@@ -31,10 +35,18 @@ export class ConfigurationService implements IConfigurationService {
 
   // database
   public get databaseHost(): string {
+    if (this.isProduction) {
+      return 'database';
+    }
+
     return this.configService.get('DATABASE_HOST', { infer: true });
   }
 
   public get databasePort(): number {
+    if (this.isProduction) {
+      return 5432;
+    }
+
     return this.configService.get('DATABASE_PORT', { infer: true });
   }
 

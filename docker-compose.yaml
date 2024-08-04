@@ -1,6 +1,6 @@
 services:
   database:
-    container_name: test-task-database
+    container_name: task-database
     image: postgres:latest
     restart: always
     shm_size: 256mb
@@ -16,7 +16,20 @@ services:
     ports:
       - ${DATABASE_PORT}:5432
     networks:
-      - server-network
+      - common-network
+
+  server:
+    container_name: task-server
+    build: .
+    env_file:
+      - .env
+    ports:
+      - ${SERVER_PORT}:${SERVER_PORT}
+    depends_on:
+      database:
+        condition: service_healthy
+    networks:
+      - common-network
 
 networks:
-  server-network:
+  common-network:
